@@ -47,6 +47,22 @@ return {
       lspconfig.eslint.setup({
         capabilities = capabilities
       })
+      lspconfig.gopls.setup({
+        capabilities = capabilities,
+        cmd = { "gopls" },
+        filetypes = { "go", "gomod", "gowork", "gotmpl" },
+        root_dir = lspconfig.util.root_pattern("go.work", "go.mod", ".git"),
+        settings = {
+          gopls = {
+            completeUnimported = true,
+            usePlaceholders = true,
+            analyses = {
+              unusedparams = true,
+            },
+            staticcheck = true,
+          },
+        },
+      })
 
       vim.keymap.set("n", "I", vim.lsp.buf.hover, {})                    -- Shift + i = I to display hover information for LSP
       vim.keymap.set("n", "D", vim.lsp.buf.definition, {})               -- Shift + d = D to display the definitions and implementation

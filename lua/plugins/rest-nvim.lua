@@ -1,16 +1,28 @@
 -- plugins/rest.lua
 return {
-   "rest-nvim/rest.nvim",
-   dependencies = { { "nvim-lua/plenary.nvim" } },
-   config = function()
-     require("rest-nvim").setup({
-       --- Get the same options from Packer setup
-      vim.keymap.set("n", "<leader>t", "<Plug>RestNvim"), -- Space + t -> Run request under the cursor
-      vim.keymap.set("n", "<leader>tp", "<Plug>RestNvimPreview"), -- Space + tp -> Preview request
-      vim.keymap.set("n", "<leader>tl", "<Plug>RestNvimLast") -- Space + tl -> Re-run last request
-    })
-  end
+  {
+    "vhyrro/luarocks.nvim",
+    branch = "go-away-python",
+    opts = {
+      rocks = { "lua-curl", "nvim-nio", "mimetypes", "xml2lua" }, -- Specify LuaRocks packages to install
+    },
+  },
+  {
+    "rest-nvim/rest.nvim",
+    event = "VeryLazy",
+    ft = { "http" },
+    dependencies = {
+      {
+        "luarocks.nvim",
+      },
+    },
+    config = function()
+      require("rest-nvim").setup()
+      require("telescope").load_extension("rest")
+    end,
+    keys = {
+      { "<leader>t", "<cmd>Rest run<cr>",                  desc = "Run rest http request under cursor" },
+      { "<leader>ft", "<cmd>Telescope rest select_env<cr>", desc = "Select environment file for rest testing" },
+    },
+  },
 }
-
-
-
