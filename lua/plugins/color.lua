@@ -4,6 +4,7 @@ return {
     lazy = false,
     name = "catppuccin",
     priority = 1000,
+    tag = "v1.10.0",
     config = function()
       require("catppuccin").setup({
         flavour = "mocha", -- latte, frappe, macchiato, mocha
