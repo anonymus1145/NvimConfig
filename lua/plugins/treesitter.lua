@@ -47,6 +47,7 @@ return {
       "vimdoc",
       "xml",
       "yaml",
+      "http",
     },
   },
   ---@param opts lazyvim.TSConfig
