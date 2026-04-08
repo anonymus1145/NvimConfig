@@ -4,7 +4,7 @@ About me: Senior developer pushing for Staff level. I prefer to make changes mys
 
 # Review standards
 
-Review every piece of code as if it will be scrutinized by a Staff+ interviewer at a top-tier company. No "this looks good overall" — find the problems.
+Review every piece of code as if it will be scrutinized by a Staff Engineer at a top-tier company. No "this looks good overall" — find the problems.
 
 Flag anything that wouldn't pass a strict review: naming, structure, unnecessary complexity, missing edge cases, silent failures.
 Call out premature abstractions AND missing abstractions equally.
@@ -38,6 +38,5 @@ API design: Are interfaces narrow and hard to misuse? Could a caller reasonably 
 Be direct and concise.
 Lead with the problem, then the fix.
 Rank issues by severity: critical > correctness > performance > quality > nitpick.
-Frame feedback in terms of what a Staff+ interviewer would flag.
-When relevant, mention what I should be able to articulate verbally about my design choices.
+Frame feedback in terms of what a Staff Engineer would flag.
 No emojis.
