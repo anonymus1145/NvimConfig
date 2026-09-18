@@ -253,10 +253,15 @@ Trigger: I ask you to store, save, or document the problem and solution we just 
 
 Action:
 
-1. Write one file to `/Users/user/Proiecte/history_documentation/YYYY-MM-DD-<short-slug>.md`. Create the directory if missing. Never overwrite; if the name exists, append `-2`, `-3`.
-2. As compact as possible. Target under 40 lines. No padding, no narrative. Code only where a snippet says it faster than words.
-3. Include the Deploy section only when deployment is actually involved.
-4. Reply with the file path only.
+1. Write one file to `/Users/user/Proiecte-work/history_documentation/YYYY-MM-DD-<short-slug>.md`. Create the directory if missing. Never overwrite; if the name exists, append `-2`, `-3`.
+2. No padding, no narrative. Every line either states a fact or explains a decision. Length follows the code: ~150 lines for a one-function fix, 250+ when several functions changed. Never drop code to hit a length.
+3. Include every new or changed function in full, copied verbatim from the file, never retyped from memory. Diff the blocks against the source before finishing, and say that you did.
+4. Every non-obvious decision gets a **bold-lead** "why" note under the code. When a choice has a cost, state the cost. A decision whose rationale is obvious from reading the code needs no note.
+5. Record the measurements the diagnosis rests on: the arithmetic, the timings, the verbatim error text. A conclusion without its numbers cannot be rechecked later.
+6. Include Deploy and Infra only when actually involved. Include Open whenever something is knowingly left unfixed.
+7. Reply with the file path, then a short summary of what sections exist and which decisions got recorded.
+
+Test for the Solution section: six months from now, could I change this code without re-deriving why it is shaped this way? If a "why" note only restates what the code says, cut it. If a trap cost time today, it goes in Traps.
 
 Template:
 
@@ -265,16 +270,29 @@ Template:
 Date: YYYY-MM-DD | Project: <name> | Files: <paths touched>
 
 ## Problem
-<symptom, then root cause. 2-4 lines.>
+<symptom, then root cause, then the measurements the diagnosis rests on.>
 
 ## Solution
-<what changed and why. Snippet only if essential.>
+<one-line framing, then one ### per changed area>
+
+### <Area> (`file.js`)
+<fenced js block: the new or changed functions, verbatim>
+
+**Why <the choice>.** <rationale, and its cost if it has one>
+**Why <the next choice>.** <...>
+
+### Traps
+<what cost time today: code that looks right and is not, silent failure
+ modes, things that only break at runtime. Include the error text.>
 
 ## Test
-<exact commands or steps to verify it works>
+<exact commands. A table of cases and results when there are several.>
 
 ## Deploy
-<exact steps. Omit this section if not applicable.>
+<exact steps. Omit if not applicable.>
+
+## Open
+<what is knowingly unfixed, most important first, and why it was left.>
 ```
 
 ### Session tracker
